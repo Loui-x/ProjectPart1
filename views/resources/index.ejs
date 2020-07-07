@@ -1,0 +1,64 @@
+<!--
+  Step 1: This is your descretion how you would like to display data,
+  but you must list all the documents in your resource collection.
+--><%- include ('../partials/header') %>
+
+<div class="container my-5">
+  <header>
+    <h1>Employee Vacation Details </h1>
+  </header>
+  <hr>
+  <div class="content">
+    <% for (let dayoff of daysOff) { %>
+      <div class="card my-3">
+        <div class="card-header clearfix">
+          <div class=" float-left">
+            <h5 class="card-title"><%= dayoff.title %></h5>
+            <% if (typeof dayoff.user !== 'undefined') { %>
+              Employee Name <%= dayoff.user.firstName %>
+            <% } %>
+          </div><br>
+
+          <div class="float-right">
+            <small><%= dayoff.updatedAt %></small>
+          </div>
+          <p>
+          <div class="float-left">
+            Holiday Start Date: <%= dayoff.startDate %>
+          </div>
+          </p>
+          <p>
+           <div class="float-left">
+            Holiday End Date: <%= dayoff.endDate %>
+          </div>
+          </p><br>
+          
+        </div>
+
+        <div class="card-body">          
+          <!-- <p class="card-text">
+           
+          </p> -->
+          <a href="/resources/<%= dayoff.id %>">more...</a>
+        </div>
+
+        <% if (authorized && (typeof dayoff.user === 'undefined' || dayoff.user.email === email)) { %>
+          <div class="card-footer">
+            <a href="/resources/<%= dayoff.id %>/edit">
+              <i class="fa fa-edit"></i>
+            </a>
+            &nbsp;/&nbsp;
+            <form class="form-inline" action="/resources/delete" method="post" onsubmit="return confirm('Are you sure you want to delete the reservation');">
+              <input type="hidden" value="<%= dayoff.id %>" name="id">
+              <button class="delete" type="submit">
+                <i class="fa fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include ('../partials/footer') %>

@@ -1,0 +1,31 @@
+<!--
+  Step 1: This is your descretion how you would like to display data,
+  but you must list display only one document based on the passed ID.
+-->
+
+<%- include ('../partials/header') %>
+
+<div class="container my-5">
+  <header>
+    <h1>
+      <%= dayoffs.title %>
+      <a href="/resources/<%= dayoffs.id %>/edit">
+        <% console.log("cant get user") %>
+        <i class="fa fa-edit"></i>
+      </a>
+    </h1>
+    <br>
+    <small>
+      <%= (dayoffs.updatedAt.toLocaleString("en-CA")) %>
+    </small>
+    <p><strong>By: <%= dayoffs.user.firstName  %></strong></p>
+    <p><strong>Holidays start from: <%= dayoffs.startDate %></strong></p>
+    <p><strong>to: <%= dayoffs.endDate %></strong></p>
+  </header>
+  <hr>
+  <div class="content">
+    <%- dayoffs.content %>
+  </div>
+</div>
+
+<%- include ('../partials/footer') %>

@@ -1,0 +1,45 @@
+<!--
+  Step 1: The form must be sharable between the new and edit views.
+-->
+<form action="<%= (typeof actionPath === 'undefined') ? '/resources' : actionPath %>", method="POST">
+  <% if (typeof actionPath !== 'undefined') { %>
+    <input type="hidden" name="id" value="<%= formData.id %>">
+  <% } %>
+
+  <div class="form-group">
+    <label for="startDate">Start Date</label>
+    <input type="date" name="startDate" class="form-control" value="<%= formData.startDate %>">
+  </div>
+  <div class="form-group">
+    <label for="endDate">End Date</label>
+    <input type="date" name="endDate" class="form-control" value="<%= formData.endDate %>">
+  </div>
+  <div class="form-group">
+    
+    <label for="reasonforAbsence">Reason For Absence</label>
+    <textarea name="reasonforAbsence" class="form-control summernote">
+      <%= formData.reasonforAbsence %>
+    </textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="substituteFound">Found Substitute </label>
+    <select name="substituteFound" class="form-control">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+      <%= formData.substituteFound %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="status">Status</label>
+    <select name="status" class="form-control">
+      <option value="DRAFT">Draft</option>
+      <option <%= formData.status && formData.status === 'PUBLISHED' ? 'selected' : null %> value="PUBLISHED">Published</option>
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <button class="btn btn-dark">Submit</button>
+  </div>
+</form>
